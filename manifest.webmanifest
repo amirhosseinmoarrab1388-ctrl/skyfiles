@@ -1,0 +1,19 @@
+{
+  "name": "SkyFiles - مدیریت فایل‌ها",
+  "short_name": "SkyFiles",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5fbff",
+  "theme_color": "#eaf7ff",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eaf7ff">
+  <meta name="description" content="SkyFiles - مدیریت فایل‌های شخصی">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>SkyFiles</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">☁</div>
+        <div><strong>SkyFiles</strong><small>فایل‌هات، مرتب و دم‌دست</small></div>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="تغییر حالت">☼</button>
+    </header>
+
+    <main>
+      <section class="welcome">
+        <div>
+          <span class="eyebrow">مدیریت هوشمند فایل‌ها</span>
+          <h1>همه‌چیز سر جای خودش.</h1>
+          <p>فایل‌هات رو پیدا کن، مرتب کن و از شلوغی نجات بده.</p>
+        </div>
+        <div class="cloud-art" aria-hidden="true">☁</div>
+      </section>
+
+      <section class="storage-card">
+        <div class="storage-head">
+          <div><span class="muted">وضعیت فضای انتخاب‌شده</span><h2 id="fileCount">هنوز پوشه‌ای انتخاب نشده</h2></div>
+          <span class="storage-icon">▤</span>
+        </div>
+        <div class="progress"><span id="storageProgress"></span></div>
+        <div class="storage-foot"><span id="storageHint">برای شروع، یک پوشه از گوشی انتخاب کن.</span><button class="text-btn" id="pickFolderBtn">انتخاب پوشه ←</button></div>
+      </section>
+
+      <section class="section-head">
+        <div><span class="eyebrow">کتابخانه</span><h2>دسته‌بندی فایل‌ها</h2></div>
+        <span class="count-pill" id="totalPill">۰ فایل</span>
+      </section>
+      <section class="category-grid">
+        <button class="category-card" data-filter="image"><span class="cat-icon photo">▧</span><strong>تصاویر</strong><small id="imageCount">۰ فایل</small></button>
+        <button class="category-card" data-filter="video"><span class="cat-icon video">▷</span><strong>ویدئوها</strong><small id="videoCount">۰ فایل</small></button>
+        <button class="category-card" data-filter="audio"><span class="cat-icon audio">♫</span><strong>موسیقی</strong><small id="audioCount">۰ فایل</small></button>
+        <button class="category-card" data-filter="document"><span class="cat-icon docs">▤</span><strong>اسناد و سایر</strong><small id="documentCount">۰ فایل</small></button>
+      </section>
+
+      <section class="toolbar">
+        <div class="section-head compact"><div><span class="eyebrow">دسترسی سریع</span><h2 id="listTitle">فایل‌های شما</h2></div></div>
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="جست‌وجوی نام فایل..."><kbd>⌘ K</kbd></label>
+        <div class="filters">
+          <button class="filter-chip active" data-view="all">همه</button>
+          <button class="filter-chip" data-view="favorites">★ علاقه‌مندی‌ها</button>
+          <button class="filter-chip" data-view="duplicates">تکراری‌ها</button>
+          <select id="sortSelect" aria-label="مرتب‌سازی">
+            <option value="name">نام فایل</option><option value="newest">جدیدترین</option><option value="largest">حجم بیشتر</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="file-list" id="fileList">
+        <div class="empty-state">
+          <div class="empty-icon">☁</div>
+          <h3>هنوز فایلی اینجا نیست</h3>
+          <p>یک پوشه انتخاب کن تا فایل‌هاش رو اینجا ببینی و مدیریت کنی.</p>
+          <button class="primary-btn" id="emptyPickBtn">انتخاب پوشه</button>
+        </div>
+      </section>
+      <p class="permission-note" id="permissionNote">فایل‌ها فقط پس از انتخاب پوشه و تأیید دسترسی توسط خودت قابل مشاهده‌اند. هیچ فایلی به سرور ارسال نمی‌شود.</p>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item selected" data-nav="home"><span>⌂</span>خانه</button>
+      <button class="nav-item" data-nav="favorites"><span>★</span>علاقه‌مندی</button>
+      <button class="nav-item" data-nav="duplicates"><span>⧉</span>تکراری‌ها</button>
+      <button class="nav-item" data-nav="settings"><span>⚙</span>تنظیمات</button>
+    </nav>
+  </div>
+
+  <dialog id="settingsDialog" class="modal">
+    <form method="dialog"><button class="close-btn" aria-label="بستن">×</button></form>
+    <span class="eyebrow">تنظیمات</span><h2>تنظیمات SkyFiles</h2>
+    <p>اطلاعات علاقه‌مندی‌ها و تنظیمات در حافظه همین مرورگر ذخیره می‌شود.</p>
+    <div class="setting-row"><span>پشتیبانی از دسترسی مستقیم به پوشه</span><strong id="apiStatus">در حال بررسی…</strong></div>
+    <div class="setting-row"><span>حریم خصوصی</span><strong>فقط روی دستگاه</strong></div>
+    <button class="secondary-btn" id="clearFavoritesBtn">پاک کردن علاقه‌مندی‌ها</button>
+    <p class="fine-print">برای نصب، منوی مرورگر را باز کن و گزینه «افزودن به صفحه اصلی» یا «Install app» را بزن.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
